@@ -4,32 +4,21 @@
 <title>test users</title>
 </head>
 <body>
-	
 	<br />
 	<br />
 	<table>
 		<tr>
 			<th>matricule</th>
-			
 		</tr>
 		<tr th:each="car : ${carList}">
 			<td th:text="${car.matricule}"></td>
-			
-			
 		</tr>
 	</table>
-	
 	<h1>Add car</h1>
 	<form action="/addCar" method="post">
 		<input type="text" name="mtricule">
-		<input 
-           type="hidden"
-           th:value="${user.id}" id="userId" name="userId" />
-		<input type="submit" >
+		<input type="hidden" th:value="${user.id}" id="userId" name="userId" />
+		<input type="submit">
 	</form>
-	
-	
-	
-	
 </body>
 </html>

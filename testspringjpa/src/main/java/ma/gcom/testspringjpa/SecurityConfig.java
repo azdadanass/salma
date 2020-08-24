@@ -1,0 +1,29 @@
+package ma.gcom.testspringjpa;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
+
+@SuppressWarnings("deprecation")
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	DataSource dataSource;
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		String usersByUsernameQuery = "select login,password, enabled from user where login=?";
+		String authoritiesByUsernameQuery = "select login,role  from user_role ,user u where user_id = u.id and login = ?";
+		auth.jdbcAuthentication().//
+				dataSource(dataSource).//
+				usersByUsernameQuery(usersByUsernameQuery).//
+				authoritiesByUsernameQuery(authoritiesByUsernameQuery).//
+				passwordEncoder(new MessageDigestPasswordEncoder("MD5"));
+	}
+
+}
