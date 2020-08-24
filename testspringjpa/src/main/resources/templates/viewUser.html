@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>test users</title>
+</head>
+<body>
+
+	<a th:href="'/carList/'+${user.id}">View car list</a>
+	<br>
+	<br>
+	<table>
+	
+		<tr>
+			<td>firstname: </td>
+			<td th:text="${user.firstName}"></td>
+		</tr>
+		<tr>
+			<td>lastname: </td>
+			<td th:text="${user.lastName}"></td>
+		</tr>
+		
+		
+		
+		
+	</table>
+	
+		
+</body>
+</html>
