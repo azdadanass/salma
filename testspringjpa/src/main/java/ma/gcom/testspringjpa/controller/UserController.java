@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -48,8 +49,16 @@ public class UserController {
 	}
 	
 
-	@PostMapping("/user")
-	public String insert(User user) {
+	 @GetMapping("/insertUser")
+	    public String friendForm(Model model) {
+	        model.addAttribute("userForm", new User());
+	        return "insertUser";
+	    }
+	
+	
+	
+	@PostMapping("/insertUser")
+	public String insert(@ModelAttribute("userForm") User user) {
 		User createdUser = userService.save(user);
 		return "redirect:/user/" + createdUser.getId();
 		

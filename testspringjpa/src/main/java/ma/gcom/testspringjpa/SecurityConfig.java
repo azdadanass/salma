@@ -12,7 +12,7 @@ import org.springframework.security.crypto.password.MessageDigestPasswordEncoder
 @SuppressWarnings("deprecation")
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+/*
 	@Autowired
 	DataSource dataSource;
 
@@ -30,6 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				usersByUsernameQuery(usersByUsernameQuery).//
 				authoritiesByUsernameQuery(authoritiesByUsernameQuery).//
 				passwordEncoder(new MessageDigestPasswordEncoder("MD5"));
-	}
+	}*/
 
 }

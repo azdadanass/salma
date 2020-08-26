@@ -22,6 +22,7 @@ public class CarController {
 	public String insert(WebRequest request) {
 
 		String userId = request.getParameter("userId");
+		System.out.println( userId );
 		int id = Integer.parseInt(userId);
 
 		User user = userService.findOne(id);
