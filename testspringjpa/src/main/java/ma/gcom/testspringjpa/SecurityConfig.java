@@ -38,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(final HttpSecurity http) throws Exception {
 		http.authorizeRequests().//
 				antMatchers("/insertUser").hasRole("ADMIN").//
-				antMatchers("/**").hasAnyRole("USER", "ADMIN").and().formLogin();
+				antMatchers("/**").hasAnyRole("USER", "ADMIN")//
+				.and().exceptionHandling().accessDeniedPage("/ad.html").and().formLogin().defaultSuccessUrl("/user", true);
 	}
 
 	@Autowired

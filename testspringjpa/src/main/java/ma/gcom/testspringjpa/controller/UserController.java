@@ -3,6 +3,8 @@ package ma.gcom.testspringjpa.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,7 @@ public class UserController {
 		String test = "abcdefg";
 		model.addAttribute("userList", userList);
 		model.addAttribute("test", test);
+		model.addAttribute("connectedUser", userService.findByLogin(SecurityContextHolder.getContext().getAuthentication().getName()));
 		return "users.html";
 	}
 
@@ -35,42 +38,31 @@ public class UserController {
 	}
 
 	@GetMapping("/deleteUser/{id}")
+	@Secured("ROLE_ADMIN")
 	public String delete(@PathVariable Integer id) {
 		userService.delete(id);
 		return "redirect:/user";
 	}
-	
-	@GetMapping("/carList/{id}")
-	public String getCarListUer(@PathVariable Integer id, Model model ) {
-		model.addAttribute("carList",userService.findOne(id).getCarList());
-		model.addAttribute("user",userService.findOne(id));
-		return "carListUser.html";
-		
-	}
-	
 
-	 @GetMapping("/insertUser")
-	    public String friendForm(Model model) {
-	        model.addAttribute("userForm", new User());
-	        return "insertUser";
-	    }
-	
-	
-	
+	@GetMapping("/carList/{id}")
+	public String getCarListUer(@PathVariable Integer id, Model model) {
+		model.addAttribute("carList", userService.findOne(id).getCarList());
+		model.addAttribute("user", userService.findOne(id));
+		return "carListUser.html";
+
+	}
+
+	@GetMapping("/insertUser")
+	public String friendForm(Model model) {
+		model.addAttribute("userForm", new User());
+		return "insertUser";
+	}
+
 	@PostMapping("/insertUser")
+	@Secured("ROLE_ADMIN") // secured by spring security
 	public String insert(@ModelAttribute("userForm") User user) {
 		User createdUser = userService.save(user);
 		return "redirect:/user/" + createdUser.getId();
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

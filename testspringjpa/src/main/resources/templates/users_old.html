@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>test users</title>
+</head>
+<body>
+	<a th:if="${connectedUser.isAdmin}" href="/insertUser">Insert New User</a>
+	<br />
+	<br />
+	<table>
+		<tr>
+			<th>firstname</th>
+			<th>lastname</th>
+			<th>actions</th>
+		</tr>
+		<tr th:each="user : ${userList}">
+			<td th:text="${user.firstName}"></td>
+			<td th:text="${user.lastName}"></td>
+			<td>
+				<a th:href="'user/'+${user.id}">view</a>
+				<a th:href="'deleteUser/'+${user.id}">delete</a>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import ma.gcom.testspringjpa.service.EmailService;
 import ma.gcom.testspringjpa.service.UserService;
 
 @SpringBootTest
@@ -17,7 +18,15 @@ class TestService {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	EmailService emailService;
+
 	@Test
+	public void testSendEmail() {
+		emailService.sendTestEmail();
+	}
+
+//	@Test
 	public void test() {
 		userService.showAllUsers();
 		userService.findAll(false);

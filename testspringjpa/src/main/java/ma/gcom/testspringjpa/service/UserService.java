@@ -22,4 +22,6 @@ public interface UserService {
 
 	void showAllUsers();
 
+	User findByLogin(String login);
+
 }
