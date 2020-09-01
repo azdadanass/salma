@@ -150,9 +150,8 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", birthday=" + birthday + "]";
 	}
-	
-	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<UserRole> getUserRoleList() {
 		return userRoleList;
 	}
@@ -162,24 +161,20 @@ public class User {
 	}
 
 	public boolean hasRole(String role) {
-		
+//		return userRoleList.stream().map(userRole -> userRole.getRole()).anyMatch(r -> r.equals(role));
 		for (UserRole userRole : userRoleList) {
-			
-			if(role.equals(userRole.getRole())){
-				return true ;
+			if (role.equals(userRole.getRole())) {
+				return true;
 			}
-			
 		}
-		 
-		return false ;
-		
+		return false;
 	}
-	
+
 	@Transient
 	public boolean getIsAdmin() {
 		return this.hasRole("ROLE_ADMIN");
 	}
-	
+
 	@Transient
 	public boolean getIsUser() {
 		return this.hasRole("ROLE_USER");
