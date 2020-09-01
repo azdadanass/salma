@@ -33,6 +33,7 @@ public class User {
 	private Boolean enabled;
 
 	private List<Car> carList = new ArrayList<Car>();
+	private List<UserRole> userRoleList = new ArrayList<UserRole>();
 
 	public User() {
 	}
@@ -148,6 +149,40 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", birthday=" + birthday + "]";
+	}
+	
+	
+	@OneToMany(fetch=FetchType.LAZY,mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<UserRole> getUserRoleList() {
+		return userRoleList;
+	}
+
+	public void setUserRoleList(List<UserRole> userRoleList) {
+		this.userRoleList = userRoleList;
+	}
+
+	public boolean hasRole(String role) {
+		
+		for (UserRole userRole : userRoleList) {
+			
+			if(role.equals(userRole.getRole())){
+				return true ;
+			}
+			
+		}
+		 
+		return false ;
+		
+	}
+	
+	@Transient
+	public boolean getIsAdmin() {
+		return this.hasRole("ROLE_ADMIN");
+	}
+	
+	@Transient
+	public boolean getIsUser() {
+		return this.hasRole("ROLE_USER");
 	}
 
 }
