@@ -75,4 +75,12 @@ public class UserServiceImpl implements UserService {
 		return repos.findByLogin(login);
 	}
 
+	@Override
+	public void updatePassword(String password, Integer id) {
+		repos.updatePassword(password,id);
+		
+	}
+	
+	
+
 }

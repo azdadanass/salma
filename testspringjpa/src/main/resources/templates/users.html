@@ -65,6 +65,7 @@
 		</div>
 	</nav>
 	<main role="main" class="container">
+	<a th:if="${connectedUser.isAdmin}" href="/insertUser">Insert New User</a>
 	<div class="starter-template">
 		<h1>User List</h1>
 		<p class="lead">

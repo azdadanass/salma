@@ -1,6 +1,14 @@
 package ma.gcom.testspringjpa.controller;
 
+
+
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Random;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -12,14 +20,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import ma.gcom.testspringjpa.model.Password;
 import ma.gcom.testspringjpa.model.User;
+import ma.gcom.testspringjpa.service.EmailService;
 import ma.gcom.testspringjpa.service.UserService;
+
 
 @Controller
 public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	EmailService emailService;
+	
 
 	@GetMapping("/user")
 	public String findAll(Model model) {
@@ -57,12 +72,19 @@ public class UserController {
 		model.addAttribute("userForm", new User());
 		return "insertUser";
 	}
+	
+	
 
 	@PostMapping("/insertUser")
 	@Secured("ROLE_ADMIN") // secured by spring security
-	public String insert(@ModelAttribute("userForm") User user) {
+	public String insert(@ModelAttribute("userForm") User user) throws NoSuchAlgorithmException {
 		User createdUser = userService.save(user);
+		Password myPassword = new Password();
+		userService.updatePassword(myPassword.CryptMd5(),createdUser.getId());
+		emailService.sendOneEmail(createdUser.getId());
 		return "redirect:/user/" + createdUser.getId();
 	}
+	
+	
 
 }

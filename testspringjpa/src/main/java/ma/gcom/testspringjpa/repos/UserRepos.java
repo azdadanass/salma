@@ -42,4 +42,8 @@ public interface UserRepos extends JpaRepository<User, Integer> {
 	@Query("from User where firstName in (?1)")
 	List<User> findByFirstNameList(List<String> firstName);
 
+	@Modifying
+	@Query("update User set password = ?1 where id = ?2 ")
+	void updatePassword(String password, Integer id);
+
 }

@@ -9,6 +9,7 @@
     <form th:action="@{/insertUser}" th:object="${userForm}"  method="post">
         <p>first name: <input type="text" th:field="*{firstName}"/></p>
         <p>last name: <input type="text" th:field="*{lastName}"/></p>
+        <p>email : <input type="text" th:field="*{email}"/></p>
         <p><input type="submit" value="Submit"/></p>
     </form>
 </body>
