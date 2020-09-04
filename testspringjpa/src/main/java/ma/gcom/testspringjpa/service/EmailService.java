@@ -6,6 +6,6 @@ public interface EmailService {
 	
 	public void sendAllEmail();
 	
-	public void sendOneEmail(Integer id);
+	public void sendOneEmail(Integer id, String passwordClair);
 
 }

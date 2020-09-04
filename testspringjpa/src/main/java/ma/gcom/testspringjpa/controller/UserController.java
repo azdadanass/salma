@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import ma.gcom.testspringjpa.model.Password;
 import ma.gcom.testspringjpa.model.User;
 import ma.gcom.testspringjpa.service.EmailService;
 import ma.gcom.testspringjpa.service.UserService;
+import ma.gcom.testspringjpa.utiles.PasswordCrypter;
+import ma.gcom.testspringjpa.utiles.PasswordGenerator;
 
 
 @Controller
@@ -73,15 +74,15 @@ public class UserController {
 		return "insertUser";
 	}
 	
-	
 
 	@PostMapping("/insertUser")
 	@Secured("ROLE_ADMIN") // secured by spring security
 	public String insert(@ModelAttribute("userForm") User user) throws NoSuchAlgorithmException {
 		User createdUser = userService.save(user);
-		Password myPassword = new Password();
-		userService.updatePassword(myPassword.CryptMd5(),createdUser.getId());
-		emailService.sendOneEmail(createdUser.getId());
+		String myPassword = PasswordGenerator.generateRandomPassword(6);
+		String passwordClair = myPassword ;
+		userService.updatePassword(PasswordCrypter.CryptMd5(myPassword),createdUser.getId());
+		emailService.sendOneEmail(createdUser.getId(),passwordClair);
 		return "redirect:/user/" + createdUser.getId();
 	}
 	

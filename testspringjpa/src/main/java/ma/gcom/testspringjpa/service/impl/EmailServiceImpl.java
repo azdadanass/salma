@@ -67,7 +67,7 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public void sendOneEmail(Integer id) {
+	public void sendOneEmail(Integer id,String password) {
 		
 		mailSender.send(new MimeMessagePreparator() {
 			@Override
@@ -77,7 +77,7 @@ public class EmailServiceImpl implements EmailService {
 				message.setFrom("testspringboot1", "testSpringMail");
 				message.setTo(user.getEmail());
 				message.setSubject("Subject");
-				message.setText("Bonjour M."+user.getLastName()+" votre email:"+user.getEmail()+" votre mot de passe: ", true);
+				message.setText("Bonjour M."+user.getLastName()+" votre email:"+user.getEmail()+" votre mot de passe: " + password, true);
 				System.out.println(user.getPassword());
 				
 			}

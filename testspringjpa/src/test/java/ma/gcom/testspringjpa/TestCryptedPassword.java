@@ -10,6 +10,8 @@ import javax.xml.bind.DatatypeConverter;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
 
+import ma.gcom.testspringjpa.utiles.PasswordGenerator;
+
 
 
 
@@ -27,11 +29,11 @@ public class TestCryptedPassword {
 	    assertEquals("a564de63c2d0da68cf47586ee05984d7", hashedPass);
 	}
 	
-	@Test
+	//@Test
 	public void CryptMd5() 
 	  throws NoSuchAlgorithmException {
-	    String hash = "35454B055CC325EA1AF2126E27707052";
-	    String password = "ILoveJava";
+	    String hash = "f6852b2a3ac0cd7e69c801f69eddb57a";
+	    String password = "salma";
 	        
 	    MessageDigest md = MessageDigest.getInstance("MD5");
 	    md.update(password.getBytes());
@@ -39,8 +41,15 @@ public class TestCryptedPassword {
 	    String myHash = DatatypeConverter
 	      .printHexBinary(digest).toUpperCase();
 	    
-	    assertEquals(hash,myHash );
+	   
+	    
+	    assertEquals(hash,myHash.toLowerCase());
 	        
+	}
+	
+	@Test
+	public void testGenerator() {
+		System.out.println(PasswordGenerator.generateRandomPassword(6));
 	}
 
 }
