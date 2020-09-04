@@ -23,7 +23,9 @@ public interface UserService {
 	void showAllUsers();
 
 	User findByLogin(String login);
-	
+
 	void updatePassword(String password, Integer id);
+
+	void auditUserTable();
 
 }

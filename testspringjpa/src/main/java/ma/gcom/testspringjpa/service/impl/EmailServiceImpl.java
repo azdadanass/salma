@@ -20,8 +20,8 @@ public class EmailServiceImpl implements EmailService {
 
 	@Autowired
 	private JavaMailSender mailSender;
-	
-	@Autowired 
+
+	@Autowired
 	UserService userService;
 
 	@Override
@@ -40,7 +40,7 @@ public class EmailServiceImpl implements EmailService {
 		});
 
 	}
-	
+
 	@Override
 	public void sendAllEmail() {
 		mailSender.send(new MimeMessagePreparator() {
@@ -49,26 +49,25 @@ public class EmailServiceImpl implements EmailService {
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 				message.setFrom("gcomappstest@gmail.com", "AA");
 				for (User user : userService.findAll(true)) {
-					
-					if(user.getEmail() != null) {
-						
+
+					if (user.getEmail() != null) {
+
 						message.setTo(user.getEmail());
 						message.setSubject("Subject");
 						message.setText("Message", true);
-						
+
 					}
-					
-					
-				} 
-				
+
+				}
+
 			}
 		});
 
 	}
 
 	@Override
-	public void sendOneEmail(Integer id,String password) {
-		
+	public void sendOneEmail(Integer id, String password) {
+
 		mailSender.send(new MimeMessagePreparator() {
 			@Override
 			public void prepare(MimeMessage mimeMessage) throws MessagingException, UnsupportedEncodingException {
@@ -77,15 +76,27 @@ public class EmailServiceImpl implements EmailService {
 				message.setFrom("testspringboot1", "testSpringMail");
 				message.setTo(user.getEmail());
 				message.setSubject("Subject");
-				message.setText("Bonjour M."+user.getLastName()+" votre email:"+user.getEmail()+" votre mot de passe: " + password, true);
+				message.setText("Bonjour M." + user.getLastName() + " votre email:" + user.getEmail() + " votre mot de passe: " + password, true);
 				System.out.println(user.getPassword());
-				
+
 			}
 		});
 
-		
 	}
-	
-	
+
+	@Override
+	public void send(String to, String subject, String text) {
+		mailSender.send(new MimeMessagePreparator() {
+			@Override
+			public void prepare(MimeMessage mimeMessage) throws MessagingException, UnsupportedEncodingException {
+				MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+				message.setFrom("testspringboot1@gmail.com", "AA");
+				message.setTo(to);
+				message.setSubject(subject);
+				message.setText(text, true);
+			}
+		});
+
+	}
 
 }

@@ -1,14 +1,7 @@
 package ma.gcom.testspringjpa.controller;
 
-
-
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
-import java.util.Random;
-
-import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -26,16 +19,14 @@ import ma.gcom.testspringjpa.service.UserService;
 import ma.gcom.testspringjpa.utiles.PasswordCrypter;
 import ma.gcom.testspringjpa.utiles.PasswordGenerator;
 
-
 @Controller
 public class UserController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	EmailService emailService;
-	
 
 	@GetMapping("/user")
 	public String findAll(Model model) {
@@ -73,19 +64,16 @@ public class UserController {
 		model.addAttribute("userForm", new User());
 		return "insertUser";
 	}
-	
 
 	@PostMapping("/insertUser")
 	@Secured("ROLE_ADMIN") // secured by spring security
 	public String insert(@ModelAttribute("userForm") User user) throws NoSuchAlgorithmException {
+		String passwordClair = PasswordGenerator.generateRandomPassword(6);
+		user.setPassword(PasswordCrypter.CryptMd5(passwordClair));
 		User createdUser = userService.save(user);
-		String myPassword = PasswordGenerator.generateRandomPassword(6);
-		String passwordClair = myPassword ;
-		userService.updatePassword(PasswordCrypter.CryptMd5(myPassword),createdUser.getId());
-		emailService.sendOneEmail(createdUser.getId(),passwordClair);
+//		userService.updatePassword(PasswordCrypter.CryptMd5(myPassword),createdUser.getId());
+		emailService.sendOneEmail(createdUser.getId(), passwordClair);
 		return "redirect:/user/" + createdUser.getId();
 	}
-	
-	
 
 }

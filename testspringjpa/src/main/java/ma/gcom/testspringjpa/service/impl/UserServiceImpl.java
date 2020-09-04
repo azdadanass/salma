@@ -1,22 +1,31 @@
 package ma.gcom.testspringjpa.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import ma.gcom.testspringjpa.model.User;
 import ma.gcom.testspringjpa.repos.UserRepos;
+import ma.gcom.testspringjpa.service.EmailService;
 import ma.gcom.testspringjpa.service.UserService;
 
 @Component
 @Transactional
 public class UserServiceImpl implements UserService {
+	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	UserRepos repos;
+
+	@Autowired
+	EmailService emailService;
 
 	@Override
 	public List<User> findAll(Boolean light) {
@@ -77,10 +86,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updatePassword(String password, Integer id) {
-		repos.updatePassword(password,id);
-		
+		repos.updatePassword(password, id);
 	}
-	
-	
+
+	@Override
+	@Scheduled(cron = "00 00 01 * * *")
+	public void auditUserTable() {
+		log.info("call auditUserTable @ " + new Date());
+		emailService.send("salma.mouloudi.98@gmail.com", "Audit", "Number of users : " + repos.count());
+	}
 
 }
