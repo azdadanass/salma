@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import ma.gcom.testspringjpa.model.User;
@@ -66,7 +67,16 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
+	@Async
 	public void sendOneEmail(Integer id, String password) {
+		System.out.println("start sendOneEmail");
+
+		try {
+			Thread.sleep(5 * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		mailSender.send(new MimeMessagePreparator() {
 			@Override
@@ -81,6 +91,8 @@ public class EmailServiceImpl implements EmailService {
 
 			}
 		});
+
+		System.out.println("end sendOneEmail");
 
 	}
 

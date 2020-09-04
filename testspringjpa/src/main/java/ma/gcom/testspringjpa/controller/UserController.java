@@ -73,6 +73,7 @@ public class UserController {
 		User createdUser = userService.save(user);
 //		userService.updatePassword(PasswordCrypter.CryptMd5(myPassword),createdUser.getId());
 		emailService.sendOneEmail(createdUser.getId(), passwordClair);
+		System.out.println("point");
 		return "redirect:/user/" + createdUser.getId();
 	}
 
