@@ -22,6 +22,15 @@ class TestService {
 	EmailService emailService;
 
 	@Test
+	public void testCaching() {
+		System.out.println("1-->" + userService.findAll(true));
+		System.out.println("2-->" + userService.findAll(true));
+		System.out.println("3-->" + userService.findAll(true));
+		userService.delete(24);
+		System.out.println("4-->" + userService.findAll(true));
+	}
+
+//	@Test
 	public void testSendEmail() {
 		emailService.sendTestEmail();
 	}

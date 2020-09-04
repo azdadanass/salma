@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -25,16 +27,20 @@ public class UserServiceImpl implements UserService {
 	UserRepos repos;
 
 	@Autowired
+	CacheManager cacheManager;
+
+	@Autowired
 	EmailService emailService;
 
 	@Override
+	@Cacheable("cache1")
 	public List<User> findAll(Boolean light) {
-		System.out.println("############################findAll");
 		return light ? repos.findAllLight() : repos.findAll();
 	}
 
 	@Override
 	public User save(User user) {
+		cacheManager.getCache("cache1").clear();
 		User databaseUser = repos.save(user);
 		repos.updateLastLogin(databaseUser.getId());
 		return databaseUser;
@@ -58,6 +64,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Boolean delete(Integer id) {
 		if (repos.existsById(id)) {
+			cacheManager.getCache("cache1").clear();
 			repos.deleteById(id);
 			return true;
 		}
@@ -86,6 +93,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updatePassword(String password, Integer id) {
+		cacheManager.getCache("cache1").clear();
 		repos.updatePassword(password, id);
 	}
 
