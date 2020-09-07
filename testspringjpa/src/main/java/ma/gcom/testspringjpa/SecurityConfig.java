@@ -36,6 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
+		http.csrf().disable();
+		http.headers().cacheControl().disable();
+		http.headers().frameOptions().disable();
 		http.authorizeRequests().//
 				antMatchers("/insertUser").hasRole("ADMIN").//
 				antMatchers("/**").hasAnyRole("USER", "ADMIN")//
