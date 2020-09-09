@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -14,19 +15,47 @@ import ma.gcom.testspringjpa.service.UserService;
 
 @ManagedBean
 @Component
-@Scope("request")
+@Scope("view")
 public class UserView {
 
 	@Autowired
 	UserService service;
 
 	private List<User> userList;
-	private User user;
+	private User user = new User();
 
 	@PostConstruct
 	public void init() {
 		System.out.println("UserView.init()");
-		userList = service.findAll(false);
+		String page = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+		String idStr = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+		switch (page) {
+		case "/userList.xhtml":
+			userList = service.findAll(false);
+			break;
+		case "/user.xhtml":
+			if (idStr != null)
+				user = service.findOne(Integer.valueOf(idStr));
+			break;
+		case "/userForm.xhtml":
+			if (idStr != null)
+				user = service.findOne(Integer.valueOf(idStr));
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	public String save() {
+		System.out.println("user.getId() ---> " + user.getId());
+		user = service.save(user);
+		return "user.xhtml?faces-redirect=true&id=" + user.getId();
+	}
+
+	public String delete(Integer id) {
+		service.delete(id);
+		return "userList.xhtml?faces-redirect=true";
 	}
 
 	public List<User> getUserList() {

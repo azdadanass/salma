@@ -1,9 +1,13 @@
 package ma.gcom.testspringjpa;
 
 import javax.faces.webapp.FacesServlet;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +34,16 @@ public class Main {
 	public ServletRegistrationBean<FacesServlet> servletRegistrationBean() {
 		FacesServlet servlet = new FacesServlet();
 		return new ServletRegistrationBean<FacesServlet>(servlet, "*.xhtml");
+	}
+
+	@Bean
+	public ServletContextInitializer requestOrCommandScopeInitializer(final ConfigurableListableBeanFactory beanFactory) {
+		return new ServletContextInitializer() {
+			@Override
+			public void onStartup(ServletContext servletContext) throws ServletException {
+				beanFactory.registerScope("view", new SpringViewJsfScope());
+			}
+		};
 	}
 
 }

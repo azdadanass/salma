@@ -1,10 +1,8 @@
 package ma.gcom.testspringjpa.model;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,7 +30,7 @@ public class User {
 	private Date birthday;
 	private Date lastLogin;
 	private Double weight;
-	private Boolean enabled;
+	private Boolean enabled = true;
 	private String email;
 
 	private List<Car> carList = new ArrayList<Car>();
@@ -46,8 +44,6 @@ public class User {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
-	
 
 	public User(Integer id, String password, String firstName, String lastName, String email) {
 		super();
@@ -173,8 +169,6 @@ public class User {
 	public void setUserRoleList(List<UserRole> userRoleList) {
 		this.userRoleList = userRoleList;
 	}
-	
-	
 
 	public String getEmail() {
 		return email;
@@ -203,9 +197,5 @@ public class User {
 	public boolean getIsUser() {
 		return this.hasRole("ROLE_USER");
 	}
-	
-	
-	
-	
-	
+
 }

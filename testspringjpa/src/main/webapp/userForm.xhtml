@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="layout.xhtml">
+	<ui:define name="title">
+		Insert User
+	</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Login" />
+				<p:inputText value="#{userView.user.login}" />
+				<h:outputText value="First Name" />
+				<p:inputText value="#{userView.user.firstName}" />
+				<h:outputText value="Last Name" />
+				<p:inputText value="#{userView.user.lastName}" />
+				<h:outputText value="Email" />
+				<p:inputText value="#{userView.user.email}" />
+				<h:outputText value="birthday" />
+				<p:calendar value="#{userView.user.birthday}" navigator="true" />
+				<h:outputText value="enabled" />
+				<p:selectBooleanCheckbox value="#{userView.user.enabled}" />
+				<p:commandButton value="Save" action="#{userView.save()}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

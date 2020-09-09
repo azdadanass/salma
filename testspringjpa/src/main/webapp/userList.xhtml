@@ -1,17 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-<h:form>
+<ui:composition template="layout.xhtml">
+	<ui:define name="title">
+		User List
+	</ui:define>
 
-	<p:dataTable id="userList" value="#{userView.userList}" var="user">
-		<p:column headerText="Login">
-			#{user.login}	
-		</p:column>
-		<p:column headerText="first name">
-			#{user.firstName}	
-		</p:column>
-	</p:dataTable>
-</h:form>
+	<ui:define name="content">
+		<h:form>
+			<p:dataTable value="#{userView.userList}" var="user" rows="15" paginator="true" paginatorAlwaysVisible="false">
+				<p:column headerText="#" sortBy="#{user.id}">
+					<h:outputText value="#{user.id}"/>
+				</p:column>
+				<p:column headerText="First Name" filterBy="#{user.firstName}" filterMatchMode="contains">
+					<h:outputText value="#{user.firstName}"/>
+				</p:column>
+				<p:column headerText="Last Name">
+					<h:outputText value="#{user.lastName}"/>
+				</p:column>
+				
+				<p:column headerText="Actions">
+					<h:outputLink value="user.xhtml">
+						<h:outputText value=" View"/>
+						<f:param name="id" value="#{user.id}"/>
+					</h:outputLink>
+					
+					<h:outputLink value="userForm.xhtml">
+						<h:outputText value=" Edit"/>
+						<f:param name="id" value="#{user.id}"/>
+					</h:outputLink>
+					
+					<p:commandLink value="Delete" action="#{userView.delete(user.id)}"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
 </html>
