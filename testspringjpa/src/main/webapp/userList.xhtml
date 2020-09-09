@@ -19,14 +19,12 @@
 				</p:column>
 				
 				<p:column headerText="Actions">
-					<h:outputLink value="user.xhtml">
+					<h:outputLink value="/jsf/user/#{user.id}">
 						<h:outputText value=" View"/>
-						<f:param name="id" value="#{user.id}"/>
 					</h:outputLink>
 					
-					<h:outputLink value="userForm.xhtml">
+					<h:outputLink value="/jsf/user/update/#{user.id}">
 						<h:outputText value=" Edit"/>
-						<f:param name="id" value="#{user.id}"/>
 					</h:outputLink>
 					
 					<p:commandLink value="Delete" action="#{userView.delete(user.id)}"/>
