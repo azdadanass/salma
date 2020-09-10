@@ -3,6 +3,7 @@ package ma.gcom.testspringjpa.view;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
@@ -21,12 +22,16 @@ public class UserView {
 	@Autowired
 	UserService service;
 
+	@Autowired
+	SessionView sessionView;
+
 	private List<User> userList;
 	private User user = new User();
 
 	@PostConstruct
 	public void init() {
 		System.out.println("UserView.init()");
+
 		String page = FacesContext.getCurrentInstance().getViewRoot().getViewId();
 		String idStr = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 		switch (page) {
@@ -47,8 +52,15 @@ public class UserView {
 
 	}
 
+	public void showThis() {
+		System.out.println(this);
+	}
+
 	public String save() {
-		System.out.println("user.getId() ---> " + user.getId());
+		if (user.getEmail() == null || !user.getEmail().matches("[a-zA-Z0-9]+@[a-z]+(.)[a-z]+")) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Email not correct", null));
+			return null;
+		}
 		user = service.save(user);
 		return "user.xhtml?faces-redirect=true&id=" + user.getId();
 	}

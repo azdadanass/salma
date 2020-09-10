@@ -16,7 +16,10 @@
 				<p:toolbar>
 					<f:facet name="left">
 						<p:button href="/jsf/user" value="Users List" />
-						<p:button href="/jsf/user/insert" value="New User" />
+						<p:button href="/jsf/user/insert" value="New User" rendered="#{sessionView.user.isAdmin}"/>
+					</f:facet>
+					<f:facet name="right">
+					<h:outputText value="Hello #{sessionView.user.fullName}"/>
 					</f:facet>
 				</p:toolbar>
 			</div>

@@ -6,9 +6,11 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form>
+			<p:messages id="messages" closable="true"/>
+			<p:growl id="growl"/>
 			<h:panelGrid columns="2">
 				<h:outputText value="Login" />
-				<p:inputText value="#{userView.user.login}" />
+				<p:inputText value="#{userView.user.login}" required="true" requiredMessage="Login should not be null"/>
 				<h:outputText value="First Name" />
 				<p:inputText value="#{userView.user.firstName}" />
 				<h:outputText value="Last Name" />
@@ -19,7 +21,7 @@
 				<p:calendar value="#{userView.user.birthday}" navigator="true" />
 				<h:outputText value="enabled" />
 				<p:selectBooleanCheckbox value="#{userView.user.enabled}" />
-				<p:commandButton value="Save" action="#{userView.save()}" />
+				<p:commandButton value="Save" action="#{userView.save()}" update="messages,growl"/>
 			</h:panelGrid>
 		</h:form>
 	</ui:define>

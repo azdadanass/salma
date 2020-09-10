@@ -7,6 +7,7 @@ class TestJava {
 	@Test
 	void contextLoads() {
 
+		System.out.println("aaaaaa0009@test.com");
 	}
 
 }

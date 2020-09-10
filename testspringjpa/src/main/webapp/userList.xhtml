@@ -4,32 +4,36 @@
 	<ui:define name="title">
 		User List
 	</ui:define>
-
 	<ui:define name="content">
 		<h:form>
-			<p:dataTable value="#{userView.userList}" var="user" rows="15" paginator="true" paginatorAlwaysVisible="false">
+			<p:dataTable id="userList" value="#{userView.userList}" var="user" rows="15" paginator="true" paginatorAlwaysVisible="false">
 				<p:column headerText="#" sortBy="#{user.id}">
-					<h:outputText value="#{user.id}"/>
+					<h:outputText value="#{user.id}" />
 				</p:column>
 				<p:column headerText="First Name" filterBy="#{user.firstName}" filterMatchMode="contains">
-					<h:outputText value="#{user.firstName}"/>
+					<h:outputText value="#{user.firstName}" />
 				</p:column>
 				<p:column headerText="Last Name">
-					<h:outputText value="#{user.lastName}"/>
+					<h:outputText value="#{user.lastName}" />
 				</p:column>
-				
-				<p:column headerText="Actions">
+				<p:column headerText="Actions" exportable="false">
 					<h:outputLink value="/jsf/user/#{user.id}">
-						<h:outputText value=" View"/>
+						<h:outputText value=" View" />
 					</h:outputLink>
-					
-					<h:outputLink value="/jsf/user/update/#{user.id}">
-						<h:outputText value=" Edit"/>
+					<h:outputLink value="/jsf/user/update/#{user.id}" rendered="#{sessionView.user.isAdmin}">
+						<h:outputText value=" Edit" />
 					</h:outputLink>
-					
-					<p:commandLink value="Delete" action="#{userView.delete(user.id)}"/>
+					<p:commandLink value="Delete" action="#{userView.delete(user.id)}" rendered="#{sessionView.user.isAdmin}" />
 				</p:column>
 			</p:dataTable>
+			<h:commandLink title="Export to excel">
+				<p:button value="Export to excel"/>
+				<p:dataExporter type="xls" target="userList" fileName="export_user_list" />
+			</h:commandLink>
+			<h:commandLink title="Export to pdf">
+				<p:button value="Export to pdf"/>
+				<p:dataExporter type="pdf" target="userList" fileName="export_user_list" />
+			</h:commandLink>
 		</h:form>
 	</ui:define>
 </ui:composition>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +89,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findByLogin(String login) {
-		return repos.findByLogin(login);
+		User user = repos.findByLogin(login);
+		Hibernate.initialize(user.getUserRoleList());
+		return user;
 	}
 
 	@Override
