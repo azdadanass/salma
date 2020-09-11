@@ -6,6 +6,8 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form>
+			<img src="#{userView.user.photo}"/>
+		
 			<h:panelGrid columns="4">
 				<h:outputText value="ID"/>
 				<h:outputText value="#{userView.user.id}"/>

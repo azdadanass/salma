@@ -32,6 +32,7 @@ public class User {
 	private Double weight;
 	private Boolean enabled = true;
 	private String email;
+	private String photo = "/img/blank.jpg";
 
 	private List<Car> carList = new ArrayList<Car>();
 	private List<UserRole> userRoleList = new ArrayList<UserRole>();
@@ -196,6 +197,14 @@ public class User {
 	@Transient
 	public boolean getIsUser() {
 		return this.hasRole("ROLE_USER");
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
 
 }
