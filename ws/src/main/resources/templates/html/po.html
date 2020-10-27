@@ -1,0 +1,89 @@
+<html>
+<body style="padding-top: 40px; background-color: #fff; font-family: 'Arial'; font-size: 12px;">
+
+	<div style="text-align:center;margin:20px 0px 10px 0px">
+      <img  th:src="|cid:${timeLine}|" />
+    </div>
+	<div style="width: 90%; margin: auto; font-family: 'Arial'; font-size: 12px;">
+		Dear valued supplier,<br /> Kindly be informed that the PO #<span th:text="${po.numero}" style="color:blue"></span> has been fully released<br />
+		<br />
+	</div>
+	<table style='border: 1px solid #ddd; border-spacing: 0; border-collapse: collapse; width: 90%; margin: auto; font-size: 12px;'>
+		<tr>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Numero</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px; color: #a069c3;' th:text="${po.numero}"></td>
+			<td width='4%' style='border-top: 1px solid #fff; border-bottom: 1px solid #fff;'></td>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Status</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${po.status.value}"></td>
+		</tr>
+		<tr>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Supplier</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px; color: #69aa46' th:text="${po.supplierName}"></td>
+			<td width='4%' style='border-top: 1px solid #fff; border-bottom: 1px solid #fff;'></td>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Company</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${po.companyName}"></td>
+		</tr>
+		<tr>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Date</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${#dates.format(po.date)}"></td>
+			<td width='4%' style='border-top: 1px solid #fff; border-bottom: 1px solid #fff;'></td>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Project</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px; color: #ff892a' th:text="${po.projectName}"></td>
+		</tr>
+		<tr>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Total Amount</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${po.amountHt}"></td>
+			<td width='4%' style='border-top: 1px solid #fff; border-bottom: 1px solid #fff;'></td>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Currency</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${po.currencyName}"></td>
+		</tr>
+		<tr>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>From Catalog</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;'th:text="${po.fromCatalog} ? 'Yes' : 'No'"></td>
+			<td width='4%' style='border-top: 1px solid #fff; border-bottom: 1px solid #fff;'></td>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Catalog Name</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${po.catalogName}"></td>
+		</tr>
+	</table>
+	<table style="border: 2px solid #307ecc; border-spacing: 0; border-collapse: collapse; width: 80%; margin: auto; margin-top: 20px; text-align: center; font-family: 'Arial'; font-size: 12px;">
+		<tr>
+			<th colspan='5' style='background-color: #307ecc; color: #fff; padding: 10px'>Po Details</th>
+		</tr>
+		<tr style='background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); font-weight: bold; color: #333333'>
+			<th width='10%' style='border: 1px solid #ddd; padding: 8px'>Reference</th>
+			<th width='60%' style='border: 1px solid #ddd; padding: 8px'>Description</th>
+			<th style='border: 1px solid #ddd; padding: 8px'>Quantity</th>
+			<th style='border: 1px solid #ddd; padding: 8px'>Unit Price</th>
+			<th style='border: 1px solid #ddd; padding: 8px'>Total Price</th>
+		</tr>
+		
+		
+		<tr th:each="detail : ${po.detailList}" style='background-color: #F9F9F9;'>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${detail.reference}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${detail.description}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${detail.quantity}+' '+${detail.unit} "></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${detail.unitPrice}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${detail.amountHt}"></td>
+		</tr>
+	</table>
+	<table style="border-spacing: 0; border-collapse: collapse; width: 80%; margin: auto; margin-top: 20px; text-align: right; font-family: 'Arial'; font-size: 15px;">
+		<tr>
+			<td>Total amount : <b th:text="${po.amountHt}+' '+${po.currencyName}" style="color:green"></b></td>
+		</tr>
+	</table>
+	<hr style='margin-top: 20px; margin-bottom: 20px; border: 0; border-top: 1px solid #eee;'>
+	<table style="border: 2px solid #307ecc; border-spacing: 0; border-collapse: collapse; width: 80%; margin: auto; margin-top: 20px; text-align: center; font-family: 'Arial'; font-size: 12px;">
+		<tr>
+			<th colspan='5' style='background-color: #307ecc; color: #fff; padding: 10px'>Payment Terms</th>
+		</tr>
+		<tr style='background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); font-weight: bold; color: #333333'>
+			<th width='50%' style='border: 1px solid #ddd; padding: 8px'>Phase</th>
+			<th width='50%' style='border: 1px solid #ddd; padding: 8px'>Percentage</th>
+		</tr>
+		<tr th:each="oldInvoiceTerm : ${po.oldInvoiceTermList}" style='background-color: #F9F9F9;'>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${oldInvoiceTerm.phase}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${oldInvoiceTerm.percentage}"></td>
+		</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<html>
+<body style="padding-top: 40px; background-color: #fff; font-family: 'Arial'; font-size: 12px;">
+	<div style='text-align: center; margin: 20px 0px 10px 0px'>
+		<a th:href='${bankPayment.qrLink}' style='text-align: right; margin: 20px 0px 10px 0px;'>
+			<img height='100' width='100' style='width: 100px; height: 100px' th:src='${bankPayment.qrImage}' />
+		</a>
+	</div>
+	<div style="width: 90%; margin: auto; font-family: 'Arial'; font-size: 12px;">
+		Dear valued supplier,<br /> 
+		<span th:text="${bankPayment.isConfirmed?'Kindly be informed that the payment below has been released by Finance team. Please allow 2 workings days to receive the funds on your bank account':'Kindly be informed that the payment below has been processed by our bank'}"></span>
+		<br />
+		<br />
+	</div>
+	<table style='border: 1px solid #ddd; border-spacing: 0; border-collapse: collapse; width: 90%; margin: auto; font-size: 12px;'>
+		<tr>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Reference</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px; color: #a069c3;' th:text="${bankPayment.reference}"></td>
+			<td width='4%' style='border-top: 1px solid #fff; border-bottom: 1px solid #fff;'></td>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Mode</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${bankPayment.mode.value}"></td>
+		</tr>
+		<tr>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Supplier</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px; color: #69aa46' th:text="${bankPayment.supplierName}"></td>
+			<td width='4%' style='border-top: 1px solid #fff; border-bottom: 1px solid #fff;'></td>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Status</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px; color: #69aa46;' th:text="${bankPayment.status.value}"></td>
+		</tr>
+		<tr>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Bankaccount</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${bankPayment.bankAccountFullName}"></td>
+			<td width='4%' style='border-top: 1px solid #fff; border-bottom: 1px solid #fff;'></td>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Supplier Bankaccount</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${bankPayment.supplierBankAccountFullName}"></td>
+		</tr>
+		<tr>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Payment Date</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${bankPayment.paymentDate}"></td>
+			<td width='4%' style='border-top: 1px solid #fff; border-bottom: 1px solid #fff;'></td>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Cash Date</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${bankPayment.cashDate}"></td>
+		</tr>
+		<tr>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Total Amount</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${bankPayment.amount+' '+bankPayment.currencyName}"></td>
+			<td width='4%' style='border-top: 1px solid #fff; border-bottom: 1px solid #fff;'></td>
+			<td width='12%' style='background-color: #edf3f4; color: #336199; border: 1px solid #ddd; padding: 6px; text-align: right;'>Conversion Rate</td>
+			<td width='36%' style='border: 1px solid #ddd; border-bottom: 1px dotted #d5e4f1; border-top: 1px dotted #d5e4f1; padding: 6px;' th:text="${bankPayment.conversionRate}"></td>
+		</tr>
+	</table>
+	<hr style='margin-top: 20px; margin-bottom: 20px; border: 0; border-top: 1px solid #eee;'>
+	<table style="border: 2px solid #307ecc; border-spacing: 0; border-collapse: collapse; width: 80%; margin: auto; margin-top: 20px; text-align: center; font-family: 'Arial'; font-size: 12px;">
+		<tr>
+			<th colspan='8' style='background-color: #307ecc; color: #fff; padding: 10px'>Details</th>
+		</tr>
+		<tr style='background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6); font-weight: bold; color: #333333'>
+			<th width='10%' style='border: 1px solid #ddd; padding: 8px'>Invoice N°</th>
+			<th width='10%' style='border: 1px solid #ddd; padding: 8px'>Invoice Status</th>
+			<th style='border: 1px solid #ddd; padding: 8px'>PO Number</th>
+			<th style='border: 1px solid #ddd; padding: 8px'>Project</th>
+			<th style='border: 1px solid #ddd; padding: 8px'>Invoice Date</th>
+			<th style='border: 1px solid #ddd; padding: 8px'>Due Date</th>
+			<th style='border: 1px solid #ddd; padding: 8px'>Total Price TTC</th>
+			<th style='border: 1px solid #ddd; padding: 8px'>Remainder TTC</th>
+		</tr>
+		<tr th:each="payment : ${bankPayment.paymentList}" style='background-color: #F9F9F9;'>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${payment.acceptance.invoiceId}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${payment.acceptance.invoiceStatus.value}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${payment.acceptance.poNumero}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${payment.acceptance.projectName}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${payment.acceptance.invoiceDate}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${payment.acceptance.invoiceDueDate}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${payment.acceptance.amountTtc2}"></td>
+			<td style='border: 1px solid #ddd; padding: 8px' th:text="${payment.acceptance.paymentRemainingTtc}"></td>
+		</tr>
+	</table>
+</body>
+</html>
