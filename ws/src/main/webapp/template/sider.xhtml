@@ -6,158 +6,34 @@
 		<h:form id="sider_form">
 			<h:panelGroup id="sider-panel">
 				<ul class="nav nav-list">
-					<f:subview rendered="#{sessionView.menu==1}">
-						<li class="open">
-							<a href="#" class="dropdown-toggle">
-								<i class="menu-icon fa fa-list"></i>
-								<span class="menu-text">
-									<h:outputText value="Menu" />
-								</span>
-								<b class="arrow fa fa-angle-down"></b>
-							</a>
-							<b class="arrow"></b>
-							<ul class="submenu">
-								<li>
-									<h:outputLink value="viewUser.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-user bigger-130 blue" style="margin-right: 10px" />
-										<h:outputText value="Personal Data" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="delegationList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-sitemap bigger-130 orange" style="margin-right: 10px" />
-										<h:outputText value="Delegation List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="restrictionList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-remove bigger-130 red" style="margin-right: 10px" />
-										<h:outputText value="Restriction List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-							</ul>
-						</li>
-					</f:subview>
-					<f:subview rendered="#{sessionView.menu==2}">
-						<li class="open">
-							<a href="#" class="dropdown-toggle">
-								<i class="menu-icon fa fa-sitemap"></i>
-								<span class="menu-text">
-									<h:outputText value="Company Units" />
-								</span>
-								<b class="arrow fa fa-angle-down"></b>
-							</a>
-							<b class="arrow"></b>
-							<ul class="submenu">
-								<li>
-									<h:outputLink value="companyList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-home bigger-130 blue" style="margin-right: 10px" />
-										<h:outputText value="Company List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="buList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-sitemap bigger-130 green" style="margin-right: 10px" />
-										<h:outputText value="Bu List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="lobList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-sitemap bigger-130 orange" style="margin-right: 10px" />
-										<h:outputText value="Lob List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="costcenterList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-dollar bigger-130 pink" style="margin-right: 10px" />
-										<h:outputText value="Cost Center List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="projectList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-tasks bigger-130 blue" style="margin-right: 10px" />
-										<h:outputText value="Project List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="currencyList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-money bigger-130 orange" style="margin-right: 10px" />
-										<h:outputText value="Currency List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="taskTemplateList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-list bigger-130 purple" style="margin-right: 10px" />
-										<h:outputText value="Task Template List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="textList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-list bigger-130 orange" style="margin-right: 10px" />
-										<h:outputText value="Select Lists" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-							</ul>
-						</li>
-						<li class="open">
-							<a href="#" class="dropdown-toggle">
-								<i class="menu-icon fa fa-users"></i>
-								<span class="menu-text">
-									<h:outputText value="Users &amp; Roles" />
-								</span>
-								<b class="arrow fa fa-angle-down"></b>
-							</a>
-							<b class="arrow"></b>
-							<ul class="submenu">
-								<li>
-									<h:outputLink value="userList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-users bigger-130 blue" style="margin-right: 10px" />
-										<h:outputText value="User List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="delegationList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-tags bigger-130 orange" style="margin-right: 10px" />
-										<h:outputText value="Delegation List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-								<li>
-									<h:outputLink value="restrictionList.xhtml">
-										<i class="menu-icon fa fa-caret-right"></i>
-										<i class="ace-icon fa fa-remove bigger-130 red" style="margin-right: 10px" />
-										<h:outputText value="Restriction List" />
-									</h:outputLink>
-									<b class="arrow"></b>
-								</li>
-							</ul>
-						</li>
-					</f:subview>
+					<li class="open">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text">
+								<h:outputText value="Menu" />
+							</span>
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+						<b class="arrow"></b>
+						<ul class="submenu">
+							<li>
+								<h:outputLink value="viewUser.xhtml">
+									<i class="menu-icon fa fa-caret-right"></i>
+									<i class="ace-icon fa fa-list bigger-130 green" style="margin-right: 10px" />
+									<h:outputText value="Sms List" />
+								</h:outputLink>
+								<b class="arrow"></b>
+							</li>
+							<li>
+								<h:outputLink value="delegationList.xhtml">
+									<i class="menu-icon fa fa-caret-right"></i>
+									<i class="ace-icon fa fa-list bigger-130 orange" style="margin-right: 10px" />
+									<h:outputText value="Email List" />
+								</h:outputLink>
+								<b class="arrow"></b>
+							</li>
+						</ul>
+					</li>
 				</ul>
 			</h:panelGroup>
 		</h:form>

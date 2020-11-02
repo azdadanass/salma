@@ -10,7 +10,7 @@
 			<div class="modal-header">
 				<h4 class="modal-title">
 					<i class="ace-icon fa fa-trash-o red" />
-					<h:outputText value=" Delete ProjectPlanning" />
+					<h:outputText value=" Delete Sms" />
 				</h4>
 			</div>
 			<div class="modal-body">
@@ -18,7 +18,7 @@
 			</div>
 			<div class="modal-footer">
 				<p:commandButton onclick="PF('deleteDlg').hide()" value="Hide" styleClass="btn btn-warning" />
-				<p:commandButton action="#{projectPlanningView.delete()}" value="Delete" styleClass="btn btn-danger" oncomplete="PF('deleteDlg').hide()" />
+				<p:commandButton action="#{smsView.delete()}" value="Delete" styleClass="btn btn-danger" oncomplete="PF('deleteDlg').hide()" />
 			</div>
 		</p:dialog>
 	</h:form>
@@ -39,7 +39,7 @@
 			</div>
 			<div class="modal-footer">
 				<p:commandButton onclick="PF('toggleDlg').hide()" value="Hide" styleClass="btn btn-warning" />
-				<p:commandButton action="#{projectPlanningView.toggle()}" value="Toggle" styleClass="'btn #{'+${name2}+'View.model.active?\'btn-danger\':\'btn-success\'}'" oncomplete="PF('toggleDlg').hide()" update=":main_form"/>
+				<p:commandButton action="#{smsView.toggle()}" value="Toggle" styleClass="'btn #{'+${name2}+'View.model.active?\'btn-danger\':\'btn-success\'}'" oncomplete="PF('toggleDlg').hide()" update=":main_form"/>
 			</div>
 		</p:dialog>
 	</h:form>

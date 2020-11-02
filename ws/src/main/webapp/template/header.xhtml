@@ -82,12 +82,6 @@
 										<h:outputText value="Send Mail To Support" />
 									</a>
 								</li>
-								<li>
-									<p:commandLink onclick="PF('changePasswordDlg').show()">
-										<i class="ace-icon fa fa-cog pink"></i>
-										<h:outputText value="Change Password" />
-									</p:commandLink>
-								</li>
 								<li class="divider"></li>
 								<li>
 									<a href="logout">
@@ -102,51 +96,5 @@
 			</div>
 		</div>
 	</h:form>
-	<h:form id="changePasswordForm">
-		<p:dialog widgetVar="changePasswordDlg" modal="true" closable="false" resizable="false" showHeader="false">
-			<button type="button" class="bootbox-close-button close" onclick="PF('changePasswordDlg').hide()">
-				<h:outputText value="x" />
-			</button>
-			<div class="modal-header">
-				<h4 class="modal-title">
-					<i class="ace-icon fa fa-cog pink" />
-					<h:outputText value=" Change my password" />
-				</h4>
-			</div>
-			<div class="modal-body">
-				<p:messages id="messages" closable="true" />
-				<div class="col-sm-12 row">
-					<div class="col-sm-offset-2 col-sm-10  col-sm-offset-1 col-xs-10 form-group">
-						<div class="col-sm-3 col-xs-5">
-							<h:outputText value="Old Password" />
-						</div>
-						<div class="col-sm-9 col-xs-7">
-							<p:password value="#{passwordView.oldPassword}" required="true" requiredMessage="You should insert your old password" />
-						</div>
-					</div>
-					<div class="col-sm-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 form-group">
-						<div class="col-sm-3 col-xs-5">
-							<h:outputText value="New Password" />
-						</div>
-						<div class="col-sm-9 col-xs-7">
-							<p:password value="#{passwordView.newPassword}" required="true" requiredMessage="New password is required" />
-						</div>
-					</div>
-					<div class="col-sm-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 form-group">
-						<div class="col-sm-3 col-xs-5">
-							<h:outputText value="Repeat Password" />
-						</div>
-						<div class="col-sm-9 col-xs-7">
-							<p:password value="#{passwordView.confirmation}" required="true" requiredMessage="Please do up your new password" />
-						</div>
-					</div>
-				</div>
-				<div class="row"></div>
-			</div>
-			<div class="modal-footer">
-				<p:commandButton onclick="PF('changePasswordDlg').hide()" value="Hide" styleClass="btn btn-warning" partialSubmit="true" process="@this" />
-				<p:commandButton action="#{passwordView.updatePassword()}" value="Change" styleClass="btn btn-success" update="messages" />
-			</div>
-		</p:dialog>
-	</h:form>
+	
 </ui:composition>

@@ -1,41 +1,28 @@
 package ma.azdad.service;
 
-import java.util.HashMap;
-import java.util.Set;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+
+import ma.azdad.model.Sms;
+import ma.azdad.repos.SmsRepos;
 
 @Component
-@Transactional
-public class SmsService {
-	protected final Logger log = LoggerFactory.getLogger(SmsService.class);
+public class SmsService extends GenericService<Sms, SmsRepos> {
 
-	@Value("${utilsIpAddress}")
-	private String utilsIpAddress;
-
-	@Async
-	public void sendSms(String numero, String message) {
-		try {
-			String url = "http://" + utilsIpAddress + "/sendSms";
-			HashMap<String, String> params = new HashMap<>();
-			params.put("numero", numero);
-			params.put("message", message);
-			UtilsFunctions.sendHttpRequest("POST", url, params);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	@Override
+	@Cacheable("smsService.findAll")
+	public List<Sms> findAll() {
+		return repos.findAll();
 	}
 
-	@Async
-	public void sendSms(Set<String> numeroSet, String message) {
-		if (numeroSet != null)
-			for (String numero : numeroSet)
-				sendSms(numero, message);
+	@Override
+	@Cacheable("smsService.findOne")
+	public Sms findOne(Integer id) {
+		Sms sms = super.findOne(id);
+
+		return sms;
 	}
 
 }

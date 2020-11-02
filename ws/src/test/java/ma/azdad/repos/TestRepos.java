@@ -8,16 +8,15 @@ import org.springframework.test.annotation.Rollback;
 
 import ma.azdad.GenericTest;;
 
+@Transactional
 @Rollback(false)
-public class Repos extends GenericTest {
+public class TestRepos extends GenericTest {
 
 	@Autowired
 	UserRepos ur;
 
 	@Test
-	@Transactional
 	public void test1() throws Exception {
-		ur.updateContractActive();
 	}
 
 }

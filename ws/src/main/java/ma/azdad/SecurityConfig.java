@@ -29,26 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http.headers().cacheControl().disable();
 		http.headers().frameOptions().disable();
-		http.authorizeRequests()
-				//
-				.antMatchers("/resources/**", "/login.xhtml", "/blank", "/rest/**", "/resttest/**", "/passwordReset.xhtml").permitAll()
-				//
-				.antMatchers("/scripts.xhtml").hasRole(Role.ROLE_IT_MANAGER.getRole())
-				//
-				.antMatchers(getPages("Company")).hasRole(Role.ROLE_IADMIN_ADMIN.getRole())
-				//
-				.antMatchers(getPages("Lob")).hasRole(Role.ROLE_IADMIN_ADMIN.getRole())
-				//
-				.antMatchers(getPages("Bu")).hasRole(Role.ROLE_IADMIN_ADMIN.getRole())
-				//
-				.antMatchers(getPages("Costcenter")).hasRole(Role.ROLE_IADMIN_ADMIN.getRole())
-				//
-				.antMatchers(getPages("Currency")).hasRole(Role.ROLE_IADMIN_ADMIN.getRole())
-				//
-				.antMatchers("/**").hasRole(applicationCode)
-				//
-				.and().formLogin().loginPage("/login.xhtml").successForwardUrl("/index.xhtml?faces-redirect=true").defaultSuccessUrl("/index.xhtml?faces-redirect=true", true)
-				//
+		http.authorizeRequests() //
+				.antMatchers("/resources/**", "/login.xhtml", "/blank", "/rest/**", "/resttest/**", "/passwordReset.xhtml").permitAll() //
+				.antMatchers("/scripts.xhtml").hasRole(Role.ROLE_IT_MANAGER.getRole()) //
+				.antMatchers("/**").hasRole(applicationCode) //
+				.and().formLogin().loginPage("/login.xhtml").successForwardUrl("/smsList.xhtml?faces-redirect=true").defaultSuccessUrl("/smsList.xhtml?faces-redirect=true", true) //
 				.failureUrl("/login.xhtml?error1").and().exceptionHandling().accessDeniedPage("/login.xhtml?error2").and().logout().permitAll();
 	}
 
@@ -59,8 +44,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		String usernameQuery = "select login,password, 1 from users where login=?";
-		String rolesQuery = "select b.login,a.role from user_role a,users b where a.user_username = b.username and b.login=?";
+//		String usernameQuery = "select login,password, 1 from users where login=?";
+//		String rolesQuery = "select b.login,a.role from user_role a,users b where a.user_username = b.username and b.login=?";
+//		auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(usernameQuery).authoritiesByUsernameQuery(rolesQuery);
+		String usernameQuery = "select username,password, 1 from users where username=?";
+		String rolesQuery = "select b.username,a.authority  from authorities a,users b where a.username = b.username and b.username=?";
 		auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(usernameQuery).authoritiesByUsernameQuery(rolesQuery);
 	}
 
